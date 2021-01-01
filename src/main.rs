@@ -2,7 +2,7 @@ use amethyst::{
     core::transform::TransformBundle,
     prelude::*,
     renderer::{
-        plugins::{RenderFlat2D, RenderToWindow},
+        plugins::{RenderShaded3D, RenderToWindow},
         types::DefaultBackend,
         RenderingBundle,
     },
@@ -27,7 +27,7 @@ fn main() -> amethyst::Result<()> {
                     RenderToWindow::from_config_path(display_config)?
                         .with_clear([0.34, 0.36, 0.52, 1.0]),
                 )
-                .with_plugin(RenderFlat2D::default()),
+                .with_plugin(RenderShaded3D::default()),
         )?;
 
     let mut game = Application::new(resources, state::GameState, game_data)?;
