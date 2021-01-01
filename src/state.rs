@@ -15,10 +15,14 @@ impl SimpleState for GameState {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
         let world = data.world;
 
-        let prefab_handle = world.exec(|loader: PrefabLoader<'_, MyPrefabData>| {
+        let world_prefab_handle = world.exec(|loader: PrefabLoader<'_, MyPrefabData>| {
+            loader.load("prefabs/world.ron", RonFormat, ())
+        });
+        let cube_prefab_handle = world.exec(|loader: PrefabLoader<'_, MyPrefabData>| {
             loader.load("prefabs/cube.ron", RonFormat, ())
         });
-        world.create_entity().with(prefab_handle).build();
+        world.create_entity().with(world_prefab_handle).build();
+        world.create_entity().with(cube_prefab_handle).build();
     }
 
     fn handle_event(
