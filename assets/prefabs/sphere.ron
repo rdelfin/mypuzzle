@@ -1,0 +1,26 @@
+#![enable(implicit_some)]
+/*!
+    @import /amethyst_assets/src/prefab/mod.rs#Prefab
+    @import ../../src/state.rs#MyPrefabData
+    Prefab<MyPrefabData>
+*/
+
+Prefab (
+    entities: [
+        (
+            data: (
+                graphics: (
+                    mesh: Asset(File("meshes/sphere.obj", ("OBJ", ()))),
+                    material: (
+                        albedo: Generate(Srgba(0.0, 1.0, 0.0, 1.0)),
+                    ),
+                ),
+                transform: (
+                    translation: (10.0, 0.0, 5.0),
+                    scale: (2.0, 2.0, 2.0),
+                ),
+            ),
+        ),
+    ],
+)
+

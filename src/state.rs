@@ -21,8 +21,12 @@ impl SimpleState for GameState {
         let cube_prefab_handle = world.exec(|loader: PrefabLoader<'_, MyPrefabData>| {
             loader.load("prefabs/cube.ron", RonFormat, ())
         });
+        let sphere_prefab_handle = world.exec(|loader: PrefabLoader<'_, MyPrefabData>| {
+            loader.load("prefabs/sphere.ron", RonFormat, ())
+        });
         world.create_entity().with(world_prefab_handle).build();
         world.create_entity().with(cube_prefab_handle).build();
+        world.create_entity().with(sphere_prefab_handle).build();
     }
 
     fn handle_event(
