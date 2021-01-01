@@ -1,4 +1,5 @@
 use amethyst::{
+    assets::PrefabLoaderSystemDesc,
     core::transform::TransformBundle,
     prelude::*,
     renderer::{
@@ -20,6 +21,11 @@ fn main() -> amethyst::Result<()> {
     let display_config = app_root.join("config/display_config.ron");
 
     let game_data = GameDataBuilder::default()
+        .with_system_desc(
+            PrefabLoaderSystemDesc::<state::MyPrefabData>::default(),
+            "",
+            &[],
+        )
         .with_bundle(TransformBundle::new())?
         .with_bundle(
             RenderingBundle::<DefaultBackend>::new()

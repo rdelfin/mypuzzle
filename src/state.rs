@@ -1,9 +1,13 @@
 use amethyst::{
+    assets::{PrefabLoader, RonFormat},
     input::{is_close_requested, is_key_down, VirtualKeyCode},
     prelude::*,
-    renderer::Camera,
+    renderer::rendy::mesh::{Normal, Position, TexCoord},
+    utils::scene::BasicScenePrefab,
     GameData, SimpleState, SimpleTrans, StateData, StateEvent, Trans,
 };
+
+pub type MyPrefabData = BasicScenePrefab<(Vec<Position>, Vec<Normal>, Vec<TexCoord>)>;
 
 pub struct GameState;
 
@@ -11,7 +15,10 @@ impl SimpleState for GameState {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
         let world = data.world;
 
-        self.init_camera(world);
+        let prefab_handle = world.exec(|loader: PrefabLoader<'_, MyPrefabData>| {
+            loader.load("prefabs/cube.ron", RonFormat, ())
+        });
+        world.create_entity().with(prefab_handle).build();
     }
 
     fn handle_event(
@@ -25,14 +32,5 @@ impl SimpleState for GameState {
             }
         }
         Trans::None
-    }
-}
-
-impl GameState {
-    fn init_camera(&self, world: &mut World) {
-        world
-            .create_entity()
-            .with(Camera::standard_3d(1024., 768.))
-            .build();
     }
 }
