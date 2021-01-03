@@ -10,6 +10,7 @@ use amethyst::{
     utils::application_root_dir,
 };
 
+mod components;
 mod state;
 
 fn main() -> amethyst::Result<()> {
