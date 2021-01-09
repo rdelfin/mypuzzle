@@ -11,7 +11,9 @@ use amethyst::{
 };
 
 mod components;
+mod prefabs;
 mod state;
+mod systems;
 
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
@@ -23,7 +25,7 @@ fn main() -> amethyst::Result<()> {
 
     let game_data = GameDataBuilder::default()
         .with_system_desc(
-            PrefabLoaderSystemDesc::<state::MyPrefabData>::default(),
+            PrefabLoaderSystemDesc::<prefabs::PlainPrefabData>::default(),
             "",
             &[],
         )
@@ -35,7 +37,8 @@ fn main() -> amethyst::Result<()> {
                         .with_clear([0.34, 0.36, 0.52, 1.0]),
                 )
                 .with_plugin(RenderShaded3D::default()),
-        )?;
+        )?
+        .with(systems::RotateSystem, "rotate_system", &[]);
 
     let mut game = Application::new(resources, state::GameState, game_data)?;
     game.run();

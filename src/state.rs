@@ -1,13 +1,10 @@
+use crate::prefabs::PlainPrefabData;
 use amethyst::{
     assets::{PrefabLoader, RonFormat},
     input::{is_close_requested, is_key_down, VirtualKeyCode},
     prelude::*,
-    renderer::rendy::mesh::{Normal, Position, TexCoord},
-    utils::scene::BasicScenePrefab,
     GameData, SimpleState, SimpleTrans, StateData, StateEvent, Trans,
 };
-
-pub type MyPrefabData = BasicScenePrefab<(Vec<Position>, Vec<Normal>, Vec<TexCoord>)>;
 
 pub struct GameState;
 
@@ -15,13 +12,13 @@ impl SimpleState for GameState {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
         let world = data.world;
 
-        let world_prefab_handle = world.exec(|loader: PrefabLoader<'_, MyPrefabData>| {
+        let world_prefab_handle = world.exec(|loader: PrefabLoader<'_, PlainPrefabData>| {
             loader.load("prefabs/world.ron", RonFormat, ())
         });
-        let cube_prefab_handle = world.exec(|loader: PrefabLoader<'_, MyPrefabData>| {
+        let cube_prefab_handle = world.exec(|loader: PrefabLoader<'_, PlainPrefabData>| {
             loader.load("prefabs/cube.ron", RonFormat, ())
         });
-        let sphere_prefab_handle = world.exec(|loader: PrefabLoader<'_, MyPrefabData>| {
+        let sphere_prefab_handle = world.exec(|loader: PrefabLoader<'_, PlainPrefabData>| {
             loader.load("prefabs/sphere.ron", RonFormat, ())
         });
         world.create_entity().with(world_prefab_handle).build();

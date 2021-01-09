@@ -2,6 +2,7 @@
 /*!
     @import /amethyst_assets/src/prefab/mod.rs#Prefab
     @import ../../src/state.rs#MyPrefabData
+    @import ../../src/components/mod.rs#RotatingObject
     Prefab<MyPrefabData>
 */
 
@@ -19,6 +20,7 @@ Prefab (
                     translation: (10.0, 0.0, 5.0),
                     scale: (2.0, 2.0, 2.0),
                 ),
+                RotatingObject: (),
             ),
         ),
     ],
