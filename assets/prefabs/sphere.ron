@@ -2,7 +2,7 @@
 Prefab (
     entities: [
         PrefabEntity(
-            data: SpherePrefabData(
+            data: RotatingPrefab(
                 rotating_object: (rate: 0.1),
                 render: (
                     graphics: (

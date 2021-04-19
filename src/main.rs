@@ -30,7 +30,7 @@ fn main() -> amethyst::Result<()> {
             &[],
         )
         .with_system_desc(
-            PrefabLoaderSystemDesc::<prefabs::SpherePrefabData>::default(),
+            PrefabLoaderSystemDesc::<prefabs::RotatingPrefab>::default(),
             "",
             &[],
         )

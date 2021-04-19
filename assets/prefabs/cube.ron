@@ -7,17 +7,20 @@
 
 Prefab (
     entities: [
-        (
-            data: (
-                graphics: (
-                    mesh: Asset(File("meshes/cube.obj", ("OBJ", ()))),
-                    material: (
-                        albedo: Generate(Srgba(1.0, 0.0, 0.0, 1.0)),
+        PrefabEntity(
+            data: RotatingPrefab(
+                rotating_object: (rate: 0.05),
+                render: (
+                    graphics: (
+                        mesh: Asset(File("meshes/cube.obj", ("OBJ", ()))),
+                        material: (
+                            albedo: Generate(Srgba(1.0, 0.0, 0.0, 1.0)),
+                        ),
                     ),
-                ),
-                transform: (
-                    translation: (0.0, 0.0, 5.0),
-                    scale: (2.0, 2.0, 2.0),
+                    transform: (
+                        translation: (0.0, 0.0, 5.0),
+                        scale: (2.0, 2.0, 2.0),
+                    ),
                 ),
             ),
         ),

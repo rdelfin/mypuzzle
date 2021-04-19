@@ -1,4 +1,4 @@
-use crate::prefabs::{PlainPrefabData, SpherePrefabData};
+use crate::prefabs::{PlainPrefabData, RotatingPrefab};
 use amethyst::{
     assets::{PrefabLoader, RonFormat},
     input::{is_close_requested, is_key_down, VirtualKeyCode},
@@ -15,10 +15,10 @@ impl SimpleState for GameState {
         let world_prefab_handle = world.exec(|loader: PrefabLoader<'_, PlainPrefabData>| {
             loader.load("prefabs/world.ron", RonFormat, ())
         });
-        let cube_prefab_handle = world.exec(|loader: PrefabLoader<'_, PlainPrefabData>| {
+        let cube_prefab_handle = world.exec(|loader: PrefabLoader<'_, RotatingPrefab>| {
             loader.load("prefabs/cube.ron", RonFormat, ())
         });
-        let sphere_prefab_handle = world.exec(|loader: PrefabLoader<'_, SpherePrefabData>| {
+        let sphere_prefab_handle = world.exec(|loader: PrefabLoader<'_, RotatingPrefab>| {
             loader.load("prefabs/sphere.ron", RonFormat, ())
         });
         world.create_entity().with(world_prefab_handle).build();
