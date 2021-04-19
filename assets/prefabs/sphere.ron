@@ -3,8 +3,8 @@ Prefab (
     entities: [
         PrefabEntity(
             data: SpherePrefabData(
-                rotating_object: (),
-                scene: (
+                rotating_object: (rate: 0.1),
+                render: (
                     graphics: (
                         mesh: Asset(File("meshes/sphere.obj", ("OBJ", ()))),
                         material: (

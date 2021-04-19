@@ -15,5 +15,5 @@ pub type PlainPrefabData = BasicScenePrefab<(Vec<Position>, Vec<Normal>, Vec<Tex
 #[serde(deny_unknown_fields)]
 pub struct SpherePrefabData {
     rotating_object: RotatingObject,
-    scene: PlainPrefabData,
+    render: PlainPrefabData,
 }
