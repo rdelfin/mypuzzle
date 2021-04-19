@@ -29,6 +29,11 @@ fn main() -> amethyst::Result<()> {
             "",
             &[],
         )
+        .with_system_desc(
+            PrefabLoaderSystemDesc::<prefabs::SpherePrefabData>::default(),
+            "",
+            &[],
+        )
         .with_bundle(TransformBundle::new())?
         .with_bundle(
             RenderingBundle::<DefaultBackend>::new()
