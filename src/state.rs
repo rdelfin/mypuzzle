@@ -15,10 +15,14 @@ impl SimpleState for GameState {
         let world_prefab_handle = world.exec(|loader: PrefabLoader<'_, PlainPrefabData>| {
             loader.load("prefabs/world.ron", RonFormat, ())
         });
+        let floor_prefab_handle = world.exec(|loader: PrefabLoader<'_, PlainPrefabData>| {
+            loader.load("prefabs/floor.ron", RonFormat, ())
+        });
         let sphere_prefab_handle = world.exec(|loader: PrefabLoader<'_, RotatingPrefab>| {
             loader.load("prefabs/sphere.ron", RonFormat, ())
         });
         world.create_entity().with(world_prefab_handle).build();
+        world.create_entity().with(floor_prefab_handle).build();
         world.create_entity().with(sphere_prefab_handle).build();
     }
 

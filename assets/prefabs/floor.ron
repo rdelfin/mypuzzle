@@ -1,0 +1,18 @@
+#![enable(implicit_some)]
+Prefab (
+    entities: [
+        (
+            data: (
+                transform: Transform (
+                    translation: (0.0, 0.0, 0.0),
+                ),
+                graphics: (
+                    mesh: Asset(File("meshes/floor.obj", ("OBJ", ()))),
+                    material: (
+                        albedo: Generate(Srgba(1.0, 0.0, 0.0, 1.0)),
+                    ),
+                ),
+            ),
+        ),
+    ]
+)
