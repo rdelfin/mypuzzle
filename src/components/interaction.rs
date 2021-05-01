@@ -11,5 +11,7 @@ use serde::{Deserialize, Serialize};
 #[storage(DenseVecStorage)]
 #[serde(deny_unknown_fields)]
 pub struct RotatingObject {
+    pub max_rate: f32,
     pub rate: f32,
+    pub acceleration: f32,
 }
