@@ -29,12 +29,12 @@ fn main() -> amethyst::Result<()> {
     let game_data = GameDataBuilder::default()
         .with_system_desc(
             PrefabLoaderSystemDesc::<prefabs::PlainPrefabData>::default(),
-            "",
+            "plain_prefab_loader",
             &[],
         )
         .with_system_desc(
             PrefabLoaderSystemDesc::<prefabs::RotatingPrefab>::default(),
-            "",
+            "rotating_prefab_loader",
             &[],
         )
         .with_bundle(TransformBundle::new())?
