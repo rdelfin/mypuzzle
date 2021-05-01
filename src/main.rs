@@ -49,7 +49,16 @@ fn main() -> amethyst::Result<()> {
                 )
                 .with_plugin(RenderShaded3D::default()),
         )?
-        .with(systems::RotateSystem, "rotate_system", &[]);
+        .with(
+            systems::RotateInputSystem,
+            "rotate_input_system",
+            &["input_system"],
+        )
+        .with(
+            systems::RotateSystem,
+            "rotate_system",
+            &["rotate_input_system"],
+        );
 
     let mut game = Application::new(resources, state::GameState, game_data)?;
     game.run();
