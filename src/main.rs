@@ -1,6 +1,7 @@
 use amethyst::{
     assets::PrefabLoaderSystemDesc,
     core::transform::TransformBundle,
+    input::InputBundle,
     prelude::*,
     renderer::{
         plugins::{RenderShaded3D, RenderToWindow},
@@ -11,6 +12,7 @@ use amethyst::{
 };
 
 mod components;
+mod input;
 mod prefabs;
 mod state;
 mod systems;
@@ -21,7 +23,8 @@ fn main() -> amethyst::Result<()> {
     let app_root = application_root_dir()?;
 
     let resources = app_root.join("assets");
-    let display_config = app_root.join("config/display_config.ron");
+    let bindings = app_root.join("config").join("bindings.ron");
+    let display_config = app_root.join("config").join("display_config.ron");
 
     let game_data = GameDataBuilder::default()
         .with_system_desc(
@@ -35,6 +38,9 @@ fn main() -> amethyst::Result<()> {
             &[],
         )
         .with_bundle(TransformBundle::new())?
+        .with_bundle(
+            InputBundle::<input::GameBindingTypes>::new().with_bindings_from_file(bindings)?,
+        )?
         .with_bundle(
             RenderingBundle::<DefaultBackend>::new()
                 .with_plugin(

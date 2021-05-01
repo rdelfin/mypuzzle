@@ -1,0 +1,6 @@
+(
+    axes: {
+        Rotation: Emulated(pos: Key(W), neg: Key(S)),
+    },
+    actions: {},
+)
