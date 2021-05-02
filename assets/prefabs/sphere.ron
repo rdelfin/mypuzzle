@@ -5,7 +5,7 @@ Prefab (
             data: RotatingPrefab(
                 rotating_object: (max_rate: 20.0, rate: 0.0, acceleration: 2.0),
                 tracked_object: (),
-                position: Position(p: [0.0, 1.0, 0.0]),
+                position: Position(p: [0.0, 20.0, 0.0]),
                 velocity: Velocity(v: [0.0, 0.0, 0.0]),
                 weight: Weight(g: 9.81),
                 render: (
