@@ -7,6 +7,7 @@ use amethyst::{
     },
     Error,
 };
+use nalgebra::Vector2;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Component, Debug, Deserialize, Serialize, PrefabData)]
@@ -15,7 +16,7 @@ use serde::{Deserialize, Serialize};
 #[serde(deny_unknown_fields)]
 pub struct RotatingObject {
     pub max_rate: f32,
-    pub rate: f32,
+    pub rate: Vector2<f32>,
     pub acceleration: f32,
 }
 
