@@ -5,6 +5,8 @@ Prefab (
             data: RotatingPrefab(
                 rotating_object: (max_rate: 0.1, rate: 0.0, acceleration: 2.0),
                 tracked_object: (),
+                position: Position(p: [0.0, 0.0, 0.0]),
+                velocity: Velocity(v: [0.0, 0.0, 0.0]),
                 render: (
                     graphics: (
                         mesh: Asset(File("meshes/sphere.obj", ("OBJ", ()))),
