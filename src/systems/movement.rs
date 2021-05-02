@@ -6,7 +6,7 @@ use amethyst::{
     ecs::{prelude::*, Join, Read, ReadStorage, System, WriteStorage},
     input::InputHandler,
 };
-use nalgebra::Vector2;
+use nalgebra::{Unit, UnitQuaternion, Vector2, Vector3};
 
 #[derive(SystemDesc)]
 pub struct RotateSystem;
@@ -28,8 +28,15 @@ impl<'s> System<'s> for RotateSystem {
             // rate x is equivalent to sideways rotation and y is forwards and backwards
             velocity.v.x = rotation.rate.x / (2. * std::f32::consts::PI);
             velocity.v.z = rotation.rate.y / (2. * std::f32::consts::PI);
-            transform.append_rotation_z_axis(rotation.rate.x * frame_delta_s);
-            transform.append_rotation_x_axis(rotation.rate.y * frame_delta_s);
+
+            // Append axis angle to rotation based on direction of movement
+            if rotation.rate.norm() != 0. {
+                let axis = Unit::new_normalize(Vector3::new(rotation.rate.y, 0., -rotation.rate.x));
+                let angle = rotation.rate.norm() * frame_delta_s;
+                transform.set_rotation(
+                    UnitQuaternion::from_axis_angle(&axis, angle) * transform.rotation(),
+                );
+            }
         }
     }
 }
