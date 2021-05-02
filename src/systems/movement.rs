@@ -34,7 +34,7 @@ impl<'s> System<'s> for RotateInputSystem {
         let axis_rot = input.axis_value(&AxisBinding::Rotation).unwrap_or(0.0);
         let frame_delta_s = time.fixed_time().as_secs_f32();
         for rotation in (&mut rotating_objects).join() {
-            let target_rot = -axis_rot * rotation.max_rate;
+            let target_rot = axis_rot * rotation.max_rate;
             rotation.rate -= frame_delta_s * rotation.acceleration * (rotation.rate - target_rot);
         }
     }

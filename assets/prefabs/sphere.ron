@@ -4,6 +4,7 @@ Prefab (
         PrefabEntity(
             data: RotatingPrefab(
                 rotating_object: (max_rate: 0.1, rate: 0.0, acceleration: 2.0),
+                tracked_object: (),
                 render: (
                     graphics: (
                         mesh: Asset(File("meshes/sphere.obj", ("OBJ", ()))),
@@ -12,7 +13,7 @@ Prefab (
                         ),
                     ),
                     transform: (
-                        translation: (0.0, 0.0, 1.0),
+                        translation: (0.0, 1.0, 0.0),
                         scale: (1.0, 1.0, 1.0),
                     ),
                 ),
