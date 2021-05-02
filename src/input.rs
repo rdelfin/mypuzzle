@@ -10,7 +10,9 @@ pub enum AxisBinding {
 }
 
 #[derive(Clone, Debug, Hash, PartialEq, Eq, Serialize, Deserialize)]
-pub enum ActionBinding {}
+pub enum ActionBinding {
+    Jump,
+}
 
 impl Display for AxisBinding {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {

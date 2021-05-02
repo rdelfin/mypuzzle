@@ -51,7 +51,7 @@ fn main() -> amethyst::Result<()> {
         )?
         .with(systems::PhysicsSystem, "physics_system", &[])
         .with(
-            systems::RotateInputSystem,
+            systems::RotateInputSystem::default(),
             "rotate_input_system",
             &["input_system"],
         )

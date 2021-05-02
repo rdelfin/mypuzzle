@@ -1,5 +1,5 @@
 use crate::components::{RotatingObject, Velocity};
-use crate::input::{AxisBinding, GameBindingTypes};
+use crate::input::{ActionBinding, AxisBinding, GameBindingTypes};
 use amethyst::{
     core::{Time, Transform},
     derive::SystemDesc,
@@ -41,21 +41,29 @@ impl<'s> System<'s> for RotateSystem {
     }
 }
 
-#[derive(SystemDesc)]
-pub struct RotateInputSystem;
+#[derive(SystemDesc, Default)]
+pub struct RotateInputSystem {
+    jump_was_pressed: bool,
+}
 
 impl<'s> System<'s> for RotateInputSystem {
     type SystemData = (
         WriteStorage<'s, RotatingObject>,
+        WriteStorage<'s, Velocity>,
         Read<'s, InputHandler<GameBindingTypes>>,
         Read<'s, Time>,
     );
 
-    fn run(&mut self, (mut rotating_objects, input, time): Self::SystemData) {
+    fn run(&mut self, (mut rotating_objects, mut velocities, input, time): Self::SystemData) {
         let forwards_rot = input.axis_value(&AxisBinding::Forwards).unwrap_or(0.0);
         let sideways_rot = input.axis_value(&AxisBinding::Sideways).unwrap_or(0.0);
+        let jump_pressed = input.action_is_down(&ActionBinding::Jump).unwrap_or(false);
         let frame_delta_s = time.fixed_time().as_secs_f32();
-        for rotation in (&mut rotating_objects).join() {
+
+        for (rotation, velocity) in (&mut rotating_objects, &mut velocities).join() {
+            if self.jump_was_pressed && !jump_pressed {
+                velocity.v.y += 10.;
+            }
             rotation.rate += Vector2::new(
                 self.get_rotation(
                     sideways_rot,
@@ -73,6 +81,8 @@ impl<'s> System<'s> for RotateInputSystem {
                 ),
             );
         }
+
+        self.jump_was_pressed = jump_pressed;
     }
 }
 

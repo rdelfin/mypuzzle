@@ -31,6 +31,8 @@ impl<'s> System<'s> for PhysicsSystem {
         {
             let frame_delta_s = time.fixed_time().as_secs_f32();
             if let Some(velocity) = velocity {
+                position.p += frame_delta_s * velocity.v;
+
                 if let Some(weight) = weight {
                     if position.p.y > 1.0 {
                         velocity.v.y -= weight.g * frame_delta_s;
@@ -39,8 +41,6 @@ impl<'s> System<'s> for PhysicsSystem {
                         position.p.y = 1.0;
                     }
                 }
-
-                position.p += frame_delta_s * velocity.v;
             }
             transform.set_translation_xyz(position.p.x, position.p.y, position.p.z);
         }
