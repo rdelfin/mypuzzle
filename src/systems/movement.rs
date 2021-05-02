@@ -1,4 +1,4 @@
-use crate::components::RotatingObject;
+use crate::components::{RotatingObject, Velocity};
 use crate::input::{AxisBinding, GameBindingTypes};
 use amethyst::{
     core::{Time, Transform},
@@ -11,11 +11,20 @@ use amethyst::{
 pub struct RotateSystem;
 
 impl<'s> System<'s> for RotateSystem {
-    type SystemData = (WriteStorage<'s, Transform>, ReadStorage<'s, RotatingObject>);
+    type SystemData = (
+        WriteStorage<'s, Transform>,
+        WriteStorage<'s, Velocity>,
+        ReadStorage<'s, RotatingObject>,
+        Read<'s, Time>,
+    );
 
-    fn run(&mut self, (mut transforms, rotating_objects): Self::SystemData) {
-        for (transform, rotation) in (&mut transforms, &rotating_objects).join() {
-            transform.append_rotation_x_axis(rotation.rate);
+    fn run(&mut self, (mut transforms, mut velocity, rotating_objects, time): Self::SystemData) {
+        for (transform, velocity, rotation) in
+            (&mut transforms, &mut velocity, &rotating_objects).join()
+        {
+            let frame_delta_s = time.fixed_time().as_secs_f32();
+            velocity.v.z = rotation.rate / (2. * std::f32::consts::PI);
+            transform.append_rotation_x_axis(rotation.rate * frame_delta_s);
         }
     }
 }
