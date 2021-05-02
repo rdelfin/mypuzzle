@@ -12,7 +12,30 @@ Prefab (
                     graphics: (
                         mesh: Asset(File("meshes/sphere.obj", ("OBJ", ()))),
                         material: (
-                            albedo: Generate(Srgba(0.0, 1.0, 0.0, 1.0)),
+                            albedo: File(
+                                "textures/mercator_texture.png",
+                                (
+                                    "IMAGE",
+                                    (
+                                        sampler_info: (
+                                            min_filter: Linear,
+                                            mag_filter: Linear,
+                                            mip_filter: Linear,
+                                            wrap_mode: (Border, Border, Border),
+                                            lod_bias: (0),
+                                            lod_range: (
+                                                start: ( 0 ),
+                                                end: ( 8000 ),
+                                            ),
+                                            comparison: None,
+                                            border: (0),
+                                            normalized: true,
+                                            anisotropic: Off,
+                                        ),
+                                    ),
+                                )
+                            ),
+                            transparent: true,
                         ),
                     ),
                     transform: (
