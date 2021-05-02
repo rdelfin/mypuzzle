@@ -49,6 +49,7 @@ fn main() -> amethyst::Result<()> {
                 )
                 .with_plugin(RenderShaded3D::default()),
         )?
+        .with(systems::PhysicsSystem, "physics_system", &[])
         .with(
             systems::RotateInputSystem,
             "rotate_input_system",
@@ -57,7 +58,7 @@ fn main() -> amethyst::Result<()> {
         .with(
             systems::RotateSystem,
             "rotate_system",
-            &["rotate_input_system"],
+            &["rotate_input_system", "physics_system"],
         )
         .with(
             systems::CameraTrackSystem,
