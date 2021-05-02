@@ -58,6 +58,11 @@ fn main() -> amethyst::Result<()> {
             systems::RotateSystem,
             "rotate_system",
             &["rotate_input_system"],
+        )
+        .with(
+            systems::CameraTrackSystem,
+            "camera_track_system",
+            &["rotate_system"],
         );
 
     let mut game = Application::new(resources, state::GameState, game_data)?;

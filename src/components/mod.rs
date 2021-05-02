@@ -1,3 +1,3 @@
 mod interaction;
 
-pub use self::interaction::RotatingObject;
+pub use self::interaction::{RotatingObject, TrackedObject};

@@ -1,7 +1,10 @@
 use amethyst::{
     assets::PrefabData,
     derive::PrefabData,
-    ecs::{storage::DenseVecStorage, Component, Entity, WriteStorage},
+    ecs::{
+        storage::{DenseVecStorage, NullStorage},
+        Component, Entity, WriteStorage,
+    },
     Error,
 };
 use serde::{Deserialize, Serialize};
@@ -15,3 +18,9 @@ pub struct RotatingObject {
     pub rate: f32,
     pub acceleration: f32,
 }
+
+#[derive(Clone, Component, Default, Debug, Deserialize, Serialize, PrefabData)]
+#[prefab(Component)]
+#[storage(NullStorage)]
+#[serde(deny_unknown_fields)]
+pub struct TrackedObject;
