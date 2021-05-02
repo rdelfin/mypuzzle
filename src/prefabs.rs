@@ -1,4 +1,4 @@
-use crate::components::{Position, RotatingObject, TrackedObject, Velocity};
+use crate::components::{Position, RotatingObject, TrackedObject, Velocity, Weight};
 use amethyst::{
     assets::{PrefabData, ProgressCounter},
     derive::PrefabData,
@@ -18,5 +18,6 @@ pub struct RotatingPrefab {
     tracked_object: TrackedObject,
     position: Position,
     velocity: Velocity,
+    weight: Weight,
     render: PlainPrefabData,
 }

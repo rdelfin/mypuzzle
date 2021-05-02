@@ -7,6 +7,7 @@ Prefab (
                 tracked_object: (),
                 position: Position(p: [0.0, 1.0, 0.0]),
                 velocity: Velocity(v: [0.0, 0.0, 0.0]),
+                weight: Weight(g: 9.81),
                 render: (
                     graphics: (
                         mesh: Asset(File("meshes/sphere.obj", ("OBJ", ()))),
