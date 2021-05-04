@@ -33,7 +33,7 @@ fn main() -> amethyst::Result<()> {
             &[],
         )
         .with_system_desc(
-            PrefabLoaderSystemDesc::<prefabs::RotatingPrefab>::default(),
+            PrefabLoaderSystemDesc::<prefabs::PlayerPrefab>::default(),
             "rotating_prefab_loader",
             &[],
         )

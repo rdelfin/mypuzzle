@@ -27,6 +27,15 @@ pub struct Velocity {
 #[prefab(Component)]
 #[storage(DenseVecStorage)]
 #[serde(deny_unknown_fields)]
-pub struct Weight {
+pub struct Force {
+    pub f: Vector3<f32>,
+}
+
+#[derive(Clone, Component, Debug, Deserialize, Serialize, PrefabData)]
+#[prefab(Component)]
+#[storage(DenseVecStorage)]
+#[serde(deny_unknown_fields)]
+pub struct Movable {
+    pub mass: f32,
     pub g: f32,
 }

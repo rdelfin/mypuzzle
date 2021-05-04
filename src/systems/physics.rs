@@ -1,4 +1,4 @@
-use crate::components::{Position, Velocity, Weight};
+use crate::components::{Movable, Position, Velocity};
 use amethyst::{
     core::{Time, Transform},
     derive::SystemDesc,
@@ -13,19 +13,19 @@ impl<'s> System<'s> for PhysicsSystem {
         WriteStorage<'s, Transform>,
         WriteStorage<'s, Position>,
         WriteStorage<'s, Velocity>,
-        ReadStorage<'s, Weight>,
+        ReadStorage<'s, Movable>,
         Read<'s, Time>,
     );
 
     fn run(
         &mut self,
-        (mut transforms, mut positions, mut velocities, weight, time): Self::SystemData,
+        (mut transforms, mut positions, mut velocities, movables, time): Self::SystemData,
     ) {
-        for (transform, position, velocity, weight) in (
+        for (transform, position, velocity, movable) in (
             &mut transforms,
             &mut positions,
             (&mut velocities).maybe(),
-            (&weight).maybe(),
+            (&movables).maybe(),
         )
             .join()
         {
@@ -33,9 +33,9 @@ impl<'s> System<'s> for PhysicsSystem {
             if let Some(velocity) = velocity {
                 position.p += frame_delta_s * velocity.v;
 
-                if let Some(weight) = weight {
+                if let Some(movable) = movable {
                     if position.p.y > 1.0 {
-                        velocity.v.y -= weight.g * frame_delta_s;
+                        velocity.v.y -= movable.g * frame_delta_s;
                     } else {
                         velocity.v.y = 0.0;
                         position.p.y = 1.0;

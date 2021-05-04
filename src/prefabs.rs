@@ -1,4 +1,4 @@
-use crate::components::{Position, RotatingObject, TrackedObject, Velocity, Weight};
+use crate::components::{Force, Movable, Position, RotatingObject, TrackedObject, Velocity};
 use amethyst::{
     assets::{PrefabData, ProgressCounter},
     derive::PrefabData,
@@ -13,11 +13,12 @@ pub type PlainPrefabData = BasicScenePrefab<(Vec<RendPosition>, Vec<Normal>, Vec
 
 #[derive(Debug, Deserialize, Serialize, PrefabData)]
 #[serde(deny_unknown_fields)]
-pub struct RotatingPrefab {
+pub struct PlayerPrefab {
     rotating_object: RotatingObject,
     tracked_object: TrackedObject,
     position: Position,
     velocity: Velocity,
-    weight: Weight,
+    force: Force,
+    movable: Movable,
     render: PlainPrefabData,
 }
